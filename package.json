@@ -1,0 +1,17 @@
+{
+  "name": "pressblockchain-core",
+  "private": true,
+  "version": "3.0.0",
+  "scripts": {
+    "hardhat": "hardhat"
+  },
+  "devDependencies": {
+    "hardhat": "^2.22.0",
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "typescript": "^5.5.0",
+    "ts-node": "^10.9.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.0"
+  }
+}
