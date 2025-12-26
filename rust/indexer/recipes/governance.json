@@ -1,0 +1,49 @@
+{
+  "name": "governance",
+  "contracts": [
+    {
+      "name": "ProposalCenter",
+      "addressFromState": "proposalCenter"
+    },
+    {
+      "name": "CouncilEndorsements",
+      "addressFromState": "councilEndorsements"
+    },
+    {
+      "name": "PressParameters",
+      "addressFromState": "pressParameters"
+    }
+  ],
+  "events": [
+    {
+      "name": "ProposalCreated",
+      "topic0": "0x<fill_rr24>",
+      "table": "proposals"
+    },
+    {
+      "name": "VoteCast",
+      "topic0": "0x<fill_rr24>",
+      "table": "votes"
+    },
+    {
+      "name": "Endorsed",
+      "topic0": "0x<fill_rr24>",
+      "table": "council_endorsements"
+    },
+    {
+      "name": "ParamSet",
+      "topic0": "0x<fill_rr24>",
+      "table": "param_changes"
+    },
+    {
+      "name": "OutletCreated",
+      "topic0": "0x<fill_rr26>",
+      "table": "outlets"
+    },
+    {
+      "name": "OutletTokenDeployed",
+      "topic0": "0x<fill_rr26>",
+      "table": "outlet_tokens"
+    }
+  ]
+}

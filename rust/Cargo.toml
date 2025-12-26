@@ -1,0 +1,19 @@
+[workspace  "press_marketplace",
+  "press_syndication",
+  "press_status",
+  "press_bots",
+  "press_deployer",
+  "press_outlet_api",
+]
+resolver = "2"
+members = [
+  "press_indexer",
+  "press_governance",
+  "press_oracle",
+  "press_rewards",
+  "press_sources",
+  "press_treasury",
+  "press_articles"
+  "press_marketplace",
+  "press_syndication",
+]

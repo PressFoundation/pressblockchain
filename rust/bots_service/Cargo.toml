@@ -1,0 +1,38 @@
+[package]
+name = "press_bots_service"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+axum = { version = "0.7", features = ["macros","json"] }
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tower-http = { version = "0.6", features = ["cors", "trace"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+uuid = { version = "1", features = ["v4"] }
+anyhow = "1"
+time = "0.3"
+
+# Bots (scaffold; only enabled when tokens provided)
+serenity = { version = "0.12", default-features = false, features = ["client", "gateway", "rustls_backend", "model"] }
+teloxide = { version = "0.13", default-features = false, features = ["macros", "rustls"] }
+
+urlencoding = "2"
+ethers-core = "2"
+hmac = "0.12"
+sha2 = "0.10"
+base64 = "0.22"
+reqwest = { version = "0.12", default-features = false, features = ["json","rustls-tls"] }
+serde_urlencoded = "0.7"
+
+ethers = { version = "2", default-features = false, features = ["abigen", "rustls"] }
+
+tokio-util = { version = "0.7", features = ["sync"] }
+
+sqlx = { version = "0.7", features = ["runtime-tokio-rustls","sqlite"] }
+chrono = { version = "0.4", features = ["serde"] }
+
+oauth2 = "4"
+futures = "0.3"
