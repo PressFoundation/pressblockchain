@@ -1,0 +1,29 @@
+.press-vote-bar,.press-tip-box,.press-license-widget{border:1px solid #e6eef3;border-radius:14px;padding:14px;margin:16px 0;background:#fff}
+.press-vote-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed #edf3f7}
+.press-vote-row:last-child{border-bottom:none}
+.press-vote-time{margin-top:10px;color:#355266}
+.press-btn{background:#00395E;color:#fff;border:none;border-radius:12px;padding:10px 12px;margin-right:8px;cursor:pointer}
+.press-btn:hover{opacity:.95}
+.press-tip-title,.press-license-title{font-weight:700;margin-bottom:6px}
+.press-tip-sub,.press-license-sub{color:#355266;margin-bottom:10px}
+
+.press-submit{border:1px solid #e6eef3;border-radius:16px;padding:18px;background:#fff}
+.press-submit-head{margin-bottom:14px}
+.press-submit-title{font-weight:800;font-size:18px}
+.press-submit-sub{color:#355266;margin-top:6px}
+.press-submit-card label{display:block;margin-top:10px;font-weight:600;color:#244050}
+.press-submit-card input,.press-submit-card textarea{width:100%;border:1px solid #dfeaf1;border-radius:12px;padding:10px;margin-top:6px}
+.press-submit-meta{margin-top:12px;color:#244050}
+.press-muted{color:#4b6778}
+
+.press-submit-note{margin-top:10px;color:#355266}
+
+.press-portal{max-width:980px;margin:18px auto;padding:14px;}
+.press-portal-hero{display:flex;justify-content:space-between;gap:16px;align-items:center;border:1px solid #e6eef3;border-radius:18px;padding:16px;background:#fff}
+.press-portal-title{font-size:26px;font-weight:900;color:#00395E}
+.press-portal-sub{margin-top:6px;color:#355266}
+.press-portal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+.press-card{border:1px solid #e6eef3;border-radius:18px;padding:14px;background:#fff}
+.press-card-title{font-weight:900;color:#00395E}
+.press-mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
+@media (max-width:920px){.press-portal-grid{grid-template-columns:1fr}}

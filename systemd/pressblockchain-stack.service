@@ -1,0 +1,18 @@
+[Unit]
+Description=Press Blockchain Stack (Docker Compose)
+After=network-online.target docker.service
+Wants=network-online.target docker.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=/opt/pressblockchain/press-blockchain
+User=pressblockchain
+Group=pressblockchain
+Environment=COMPOSE_PROJECT_NAME=press-network-stack
+ExecStart=/usr/bin/docker compose --env-file config/press.env up -d --build
+ExecStop=/usr/bin/docker compose --env-file config/press.env down
+TimeoutStartSec=0
+
+[Install]
+WantedBy=multi-user.target

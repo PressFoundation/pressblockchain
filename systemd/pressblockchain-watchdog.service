@@ -1,0 +1,11 @@
+[Unit]
+Description=Press Blockchain Watchdog (healthcheck + auto-restart)
+After=pressblockchain-stack.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/pressblockchain/press-blockchain
+User=pressblockchain
+Group=pressblockchain
+Environment=COMPOSE_PROJECT_NAME=press-network-stack
+ExecStart=/opt/pressblockchain/press-blockchain/scripts/watchdog.sh

@@ -1,0 +1,61 @@
+/* Press SYNC admin: collapse default WP UI and foreground Press tooling */
+#adminmenu, #adminmenuback, #adminmenuwrap { transition: width .25s ease; }
+body.press-sync-mode #wpcontent { margin-left: 64px !important; }
+body.press-sync-mode #adminmenuwrap { width:64px !important; }
+body.press-sync-mode #adminmenu .wp-submenu { display:none !important; }
+body.press-sync-mode #adminmenu .wp-menu-name { display:none !important; }
+body.press-sync-mode #adminmenu a.menu-top { padding:8px 10px !important; }
+body.press-sync-mode #adminmenu .wp-menu-image:before { font-size:18px; }
+body.press-sync-mode #adminmenuback { width:64px !important; }
+
+.press-sync-shell{
+  background: radial-gradient(900px 420px at 10% 10%, rgba(45,125,255,.18), transparent 60%),
+              radial-gradient(700px 380px at 90% 18%, rgba(138,92,255,.16), transparent 55%),
+              radial-gradient(900px 420px at 50% 120%, rgba(19,196,163,.14), transparent 65%),
+              linear-gradient(180deg, rgba(0,57,94,.14), transparent 28%),
+              #050A14;
+  border-radius:16px;
+  padding:16px;
+  color:#E6F0FF;
+  border:1px solid rgba(148,163,184,.16);
+  box-shadow: 0 18px 60px rgba(0,0,0,.35);
+}
+.press-sync-top{
+  display:flex; justify-content:space-between; align-items:flex-end; gap:12px; flex-wrap:wrap;
+}
+.press-sync-logo{
+  width:42px; height:42px; border-radius:16px;
+  background: linear-gradient(135deg, rgba(45,125,255,.95), rgba(19,196,163,.85));
+  box-shadow:0 16px 46px rgba(0,0,0,.35);
+}
+.press-sync-h1{ font-size:20px; font-weight:950; margin:0; }
+.press-sync-sub{ opacity:.78; font-size:12.8px; margin-top:6px; max-width:900px; line-height:1.4; }
+.press-sync-band{ height:2px; border-radius:999px; background:linear-gradient(90deg,#2D7DFF,#8A5CFF,#13C4A3); opacity:.85; margin:12px 0; }
+.press-sync-grid{ display:grid; grid-template-columns: 1.2fr .8fr; gap:12px; margin-top:12px;}
+@media(max-width:1100px){ .press-sync-grid{ grid-template-columns: 1fr; } }
+.press-sync-card{ background:rgba(6,12,26,.64); border:1px solid rgba(148,163,184,.16); border-radius:16px; padding:14px; }
+.press-sync-title{ display:flex; justify-content:space-between; gap:10px; align-items:center; font-weight:950;}
+.press-sync-tag{ padding:6px 10px; border-radius:999px; border:1px solid rgba(148,163,184,.16); background:rgba(2,6,23,.35); font-size:12px; }
+.press-sync-tag.good{ border-color:rgba(19,196,163,.35); background:rgba(19,196,163,.18); }
+.press-sync-tag.warn{ border-color:rgba(245,158,11,.35); background:rgba(245,158,11,.14); }
+.press-sync-tag.bad{ border-color:rgba(239,68,68,.35); background:rgba(239,68,68,.14); }
+.press-sync-row{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:10px;}
+.press-sync-col2{ display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
+@media(max-width:900px){ .press-sync-col2{ grid-template-columns: 1fr; } }
+.press-sync-shell input, .press-sync-shell select, .press-sync-shell textarea{
+  width:100%; padding:10px 10px; border-radius:12px; border:1px solid rgba(148,163,184,.18);
+  background:rgba(15,23,42,.62); color:#E6F0FF;
+}
+.press-sync-btn{
+  cursor:pointer; padding:10px 12px; border-radius:12px;
+  border:1px solid rgba(45,125,255,.35);
+  background: linear-gradient(135deg, rgba(45,125,255,.22), rgba(19,196,163,.18));
+  color:#E6F0FF; font-weight:950;
+}
+.press-sync-btn2{
+  cursor:pointer; padding:10px 12px; border-radius:12px;
+  border:1px solid rgba(148,163,184,.20);
+  background: rgba(148,163,184,.08); color:#E6F0FF; font-weight:900;
+}
+.press-sync-mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size:12px; white-space:pre-wrap; }
+.press-sync-hint{ opacity:.78; font-size:12.6px; line-height:1.4; }

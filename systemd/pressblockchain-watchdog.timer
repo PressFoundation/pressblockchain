@@ -1,0 +1,10 @@
+[Unit]
+Description=Run Press Blockchain Watchdog every 2 minutes
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=2min
+Unit=pressblockchain-watchdog.service
+
+[Install]
+WantedBy=timers.target
