@@ -1,0 +1,14 @@
+[workspace]
+resolver = "2"
+members = [
+  "rust/status_service",
+  "rust/bots_service",
+  "rust/deployer_api",
+  "rust/indexer",
+  "rust/query_api",
+  "rust/common",
+]
+
+[workspace.package]
+edition = "2021"
+license = "MIT"
