@@ -1,0 +1,37 @@
+:8085 {
+  encode zstd gzip
+
+  handle_path /api/bots/* {
+    reverse_proxy press-bots:8790
+  }
+  handle_path /api/* {
+    reverse_proxy press-deployer-api:8789
+  }
+
+  # Deployer UI
+  handle_path /deployer* {
+    reverse_proxy press-deployer-ui:80
+  }
+  # Outlet wizard (served by deployer UI bundle)
+  handle_path /outlet* {
+    reverse_proxy press-deployer-ui:80
+  }
+
+  respond "Press Gateway (deployer + outlet) is online." 200
+}
+
+bots.pressblockchain.io:8085 {
+  encode zstd gzip
+  handle_path /api/bots/* {
+    reverse_proxy press-bots:8790
+  }
+  reverse_proxy press-deployer-ui:80
+}
+
+status.pressblockchain.io:8085 {
+  encode zstd gzip
+  handle_path /api/status/* {
+    reverse_proxy press-status:8791
+  }
+  reverse_proxy status-ui:8100
+}

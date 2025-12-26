@@ -1,0 +1,358 @@
+version: "3.9"
+
+x-common-env: &common_env
+  PRESS_ENV: ${PRESS_ENV:-production}
+  PRESS_CHAIN_ID: ${PRESS_CHAIN_ID:-333333}
+  PRESS_RPC_HTTP: ${PRESS_RPC_HTTP:-http://press-rpc:8545}
+  PRESS_TREASURY: ${PRESS_TREASURY:-0x0000000000000000000000000000000000000000}
+
+services:
+  # Core RPC (required)
+  press-rpc:
+    image: ghcr.io/foundry-rs/foundry:latest
+    command: ["anvil","--host","0.0.0.0","--port","8545","--chain-id","${PRESS_CHAIN_ID:-333333}"]
+    ports:
+      - "${BIND_IP:-38.146.25.37}:${RPC_PORT:-8545}:8545"
+    healthcheck:
+      test: ["CMD","sh","-lc","wget -qO- --post-data='{"jsonrpc":"2.0","id":1,"method":"eth_chainId","params":[]}' --header='Content-Type: application/json' http://127.0.0.1:8545 >/dev/null 2>&1"]
+      interval: 2s
+      timeout: 2s
+      retries: 90
+    profiles: ["core"]
+    restart: unless-stopped
+
+  # Indexer (Rust) - optional but default ON
+  press-indexer:
+    build:
+      context: ../rust
+      dockerfile: Dockerfile
+      args:
+        BIN: press_indexer
+    environment:
+      <<: *common_env
+      INDEXER_DB: /state/indexer.db
+    volumes:
+      - ../state:/state
+    depends_on:
+      press-rpc:
+        condition: service_healthy
+    ports:
+      - "${BIND_IP:-38.146.25.37}:${INDEXER_PORT:-8799}:8799"
+    profiles: ["indexer"]
+    restart: unless-stopped
+
+  press-governance:
+    build:
+      context: ../rust
+      dockerfile: Dockerfile
+      args:
+        BIN: press_governance
+    environment:
+      <<: *common_env
+      GOV_DB: /state/governance.db
+    volumes:
+      - ../state:/state
+    depends_on:
+      press-rpc:
+        condition: service_healthy
+    ports:
+      - "${BIND_IP:-38.146.25.37}:${GOV_PORT:-8801}:8801"
+    profiles: ["proposal_center"]
+    restart: unless-stopped
+
+  press-oracle:
+    build:
+      context: ../rust
+      dockerfile: Dockerfile
+      args:
+        BIN: press_oracle
+    environment:
+      <<: *common_env
+      ORACLE_DB: /state/oracle.db
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+    volumes:
+      - ../state:/state
+    depends_on:
+      press-rpc:
+        condition: service_healthy
+    ports:
+      - "${BIND_IP:-38.146.25.37}:${ORACLE_PORT:-8803}:8803"
+    profiles: ["press_oracle"]
+    restart: unless-stopped
+
+  # UIs (React) served via tiny node preview (swap to nginx/caddy in production build step)
+  indexer-ui:
+    build:
+      context: ../apps/indexer-ui
+    environment:
+      VITE_INDEXER_API: ${VITE_INDEXER_API:-http://localhost:${INDEXER_PORT:-8799}}
+    ports:
+      - "${BIND_IP:-38.146.25.37}:${INDEXER_UI_PORT:-3001}:3001"
+    profiles: ["indexer"]
+    restart: unless-stopped
+
+  proposals-ui:
+    build:
+      context: ../apps/proposals-ui
+    environment:
+      VITE_GOV_API: ${VITE_GOV_API:-http://localhost:${GOV_PORT:-8801}}
+    ports:
+      - "${BIND_IP:-38.146.25.37}:${PROPOSALS_UI_PORT:-3002}:3002"
+    profiles: ["proposal_center"]
+    restart: unless-stopped
+
+press-rewards:
+  build:
+    context: ../rust
+    dockerfile: Dockerfile
+    args:
+      BIN: press_rewards
+  environment:
+    <<: *common_env
+    REWARDS_DB: /state/rewards.db
+  volumes:
+    - ../state:/state
+  depends_on:
+    press-rpc:
+      condition: service_healthy
+  ports:
+    - "${BIND_IP:-38.146.25.37}:${REWARDS_PORT:-8805}:8805"
+  profiles: ["rewards_engine"]
+  restart: unless-stopped
+
+rewards-ui:
+  build:
+    context: ../apps/rewards-ui
+  environment:
+    VITE_REWARDS_API: ${VITE_REWARDS_API:-http://localhost:${REWARDS_PORT:-8805}}
+  ports:
+    - "${BIND_IP:-38.146.25.37}:${REWARDS_UI_PORT:-3005}:3005"
+  profiles: ["rewards_engine"]
+  restart: unless-stopped
+
+press-sources:
+  build:
+    context: ../rust
+    dockerfile: Dockerfile
+    args:
+      BIN: press_sources
+  environment:
+    <<: *common_env
+    SOURCES_DB: /state/sources.db
+  volumes:
+    - ../state:/state
+  depends_on:
+    press-rpc:
+      condition: service_healthy
+  ports:
+    - "${BIND_IP:-38.146.25.37}:${SOURCES_PORT:-8806}:8806"
+  profiles: ["source_role"]
+  restart: unless-stopped
+
+sources-ui:
+  build:
+    context: ../apps/sources-ui
+  environment:
+    VITE_SOURCES_API: ${VITE_SOURCES_API:-http://localhost:${SOURCES_PORT:-8806}}
+  ports:
+    - "${BIND_IP:-38.146.25.37}:${SOURCES_UI_PORT:-3006}:3006"
+  profiles: ["source_role"]
+  restart: unless-stopped
+
+press-treasury:
+  build:
+    context: ../rust
+    dockerfile: Dockerfile
+    args:
+      BIN: press_treasury
+  environment:
+    <<: *common_env
+  depends_on:
+    press-rpc:
+      condition: service_healthy
+  ports:
+    - "${BIND_IP:-38.146.25.37}:${TREASURY_PORT:-8807}:8807"
+  profiles: ["treasury_flywheel"]
+  restart: unless-stopped
+
+press-articles:
+  build:
+    context: ../rust
+    dockerfile: Dockerfile
+    args:
+      BIN: press_articles
+  environment:
+    <<: *common_env
+    ARTICLES_DB: /state/articles.db
+  volumes:
+    - ../state:/state
+  depends_on:
+    press-rpc:
+      condition: service_healthy
+  ports:
+    - "${BIND_IP:-38.146.25.37}:${ARTICLES_PORT:-8808}:8808"
+  profiles: ["article_lifecycle"]
+  restart: unless-stopped
+
+press-marketplace:
+  build:
+    context: ../rust
+    dockerfile: Dockerfile
+    args:
+      BIN: press_marketplace
+  environment:
+    <<: *common_env
+  depends_on:
+    press-rpc:
+      condition: service_healthy
+  ports:
+    - "${BIND_IP:-38.146.25.37}:${MARKETPLACE_PORT:-8809}:8809"
+  profiles: ["marketplace"]
+  restart: unless-stopped
+
+press-syndication:
+  build:
+    context: ../rust
+    dockerfile: Dockerfile
+    args:
+      BIN: press_syndication
+  environment:
+    <<: *common_env
+  depends_on:
+    press-rpc:
+      condition: service_healthy
+  ports:
+    - "${BIND_IP:-38.146.25.37}:${SYNDICATION_PORT:-8810}:8810"
+  profiles: ["syndication_engine"]
+  restart: unless-stopped
+
+press-status:
+  build:
+    context: ../rust
+    dockerfile: Dockerfile
+    args:
+      BIN: press_status
+  environment:
+    <<: *common_env
+  depends_on:
+    press-rpc:
+      condition: service_healthy
+  ports:
+    - "${BIND_IP:-38.146.25.37}:${STATUS_API_PORT:-8812}:8812"
+  profiles: ["status_page"]
+  restart: unless-stopped
+
+status-ui:
+  build:
+    context: ../apps/status-ui
+  environment:
+    VITE_STATUS_API: ${VITE_STATUS_API:-http://localhost:${STATUS_API_PORT:-8812}}
+  ports:
+    - "${BIND_IP:-38.146.25.37}:${STATUS_UI_PORT:-3007}:3007"
+  profiles: ["status_page"]
+  restart: unless-stopped
+
+press-bots:
+  build:
+    context: ../rust
+    dockerfile: Dockerfile
+    args:
+      BIN: press_bots
+  environment:
+    DISCORD_BOT_TOKEN: ${DISCORD_BOT_TOKEN:-}
+    TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}
+  depends_on:
+    press-rpc:
+      condition: service_healthy
+  profiles: ["bots"]
+  restart: unless-stopped
+
+dev-tools-faucet:
+  build:
+    context: ../apps/dev-tools/faucet-ui
+  ports:
+    - "${BIND_IP:-38.146.25.37}:${DEV_FAUCET_PORT:-3010}:3010"
+  profiles: ["dev_dapps"]
+  restart: unless-stopped
+
+dev-tools-contract-wizard:
+  build:
+    context: ../apps/dev-tools/contract-wizard-ui
+  ports:
+    - "${BIND_IP:-38.146.25.37}:${DEV_WIZARD_PORT:-3011}:3011"
+  profiles: ["dev_dapps"]
+  restart: unless-stopped
+
+dev-tools-rpc-console:
+  build:
+    context: ../apps/dev-tools/rpc-console-ui
+  ports:
+    - "${BIND_IP:-38.146.25.37}:${DEV_RPC_CONSOLE_PORT:-3012}:3012"
+  profiles: ["dev_dapps"]
+  restart: unless-stopped
+
+dev-tools-event-studio:
+  build:
+    context: ../apps/dev-tools/event-studio-ui
+  ports:
+    - "${BIND_IP:-38.146.25.37}:${DEV_EVENT_STUDIO_PORT:-3013}:3013"
+  profiles: ["dev_dapps"]
+  restart: unless-stopped
+
+press-deployer:
+    healthcheck:
+      test: ['CMD-SHELL', "curl -fsS http://localhost:8813/v1/health | grep -q 'ok'"]
+      interval: 5s
+      timeout: 2s
+      retries: 30
+      start_period: 3s
+  build:
+    context: ../rust
+    dockerfile: Dockerfile
+    args:
+      BIN: press_deployer
+  volumes:
+    - ..:/repo
+    - /var/run/docker.sock:/var/run/docker.sock
+  ports:
+    - "${BIND_IP:-38.146.25.37}:${DEPLOYER_API_PORT:-8813}:8813"
+  profiles: ["deployer"]
+  restart: unless-stopped
+
+deployer-ui:
+  build:
+    context: ../apps/deployer-ui
+  environment:
+    VITE_DEPLOYER_API: ${VITE_DEPLOYER_API:-http://localhost:${DEPLOYER_API_PORT:-8813}}
+  ports:
+    - "${BIND_IP:-38.146.25.37}:${DEPLOYER_UI_PORT:-3005}:3005"
+  profiles: ["deployer"]
+  restart: unless-stopped
+
+outlet-wizard-ui:
+  build:
+    context: ../apps/outlet-wizard-ui
+  ports:
+    - "${BIND_IP:-38.146.25.37}:${OUTLET_WIZARD_UI_PORT:-3008}:3008"
+  profiles: ["outlet_wizard"]
+  restart: unless-stopped
+
+press-outlet-api:
+    healthcheck:
+      test: ['CMD-SHELL', "curl -fsS http://localhost:8814/v1/health | grep -q 'ok'"]
+      interval: 5s
+      timeout: 2s
+      retries: 30
+      start_period: 3s
+  build:
+    context: ../rust
+    dockerfile: Dockerfile
+    args:
+      BIN: press_outlet_api
+  ports:
+    - "${BIND_IP:-38.146.25.37}:${OUTLET_API_PORT:-8814}:8814"
+  profiles: ["outlet_api"]
+  restart: unless-stopped
+
+# RC10 profiles
+# marketplace, liquidity_routing, distribution_pools

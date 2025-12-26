@@ -1,0 +1,223 @@
+version: "3.9"
+
+name: pressblockchain
+
+networks:
+  pressblockchain_default:
+    name: pressblockchain_default
+
+volumes:
+  press_postgres_data:
+
+services:
+  press-rpc:
+    image: ghcr.io/foundry-rs/foundry:latest
+    container_name: press-rpc
+    command: ["anvil","--host","0.0.0.0","--port","8545","--chain-id","9495","--block-time","2"]
+    ports:
+      - "8545:8545"
+    healthcheck:
+      test: ["CMD","sh","-lc","wget -qO- --post-data='{"jsonrpc":"2.0","id":1,"method":"eth_chainId","params":[]}' --header='Content-Type: application/json' http://localhost:8545 | grep -q result"]
+      interval: 2s
+      timeout: 2s
+      retries: 90
+    restart: always
+stopped
+    networks: [pressblockchain_default]
+
+  press-postgres:
+    image: postgres:16-alpine
+    container_name: press-postgres
+    environment:
+      POSTGRES_USER: press
+      POSTGRES_PASSWORD: press
+      POSTGRES_DB: press
+    ports:
+      - "5432:5432"
+    volumes:
+      - press_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL","pg_isready -U press -d press"]
+      interval: 3s
+      timeout: 3s
+      retries: 60
+    restart: unless-stopped
+    networks: [pressblockchain_default]
+
+  press-indexer:
+    env_file:
+      - ../../state/secrets.env
+    build:
+      context: ../../
+      dockerfile: rust/indexer/Dockerfile
+    container_name: press-indexer
+    environment:
+      DATABASE_URL: postgres://press:press@press-postgres:5432/press
+      RPC_HTTP: http://press-rpc:8545
+      STATE_DIR: /state
+    volumes:
+      - ../../state:/state
+    depends_on:
+      press-postgres:
+        condition: service_healthy
+      press-rpc:
+        condition: service_healthy
+    restart: unless-stopped
+    networks: [pressblockchain_default]
+
+  press-gateway:
+    env_file:
+      - ../../state/secrets.env
+    build:
+      context: ../../
+      dockerfile: rust/gateway_api/Dockerfile
+    container_name: press-gateway
+    environment:
+      PORT: "8085"
+      STATE_DIR: /state
+      INDEXER_URL: http://press-indexer:8088
+      DEPLOYER_URL: http://press-deployer-api:8086
+    volumes:
+      - ../../state:/state
+    ports:
+      - "8085:8085"
+    depends_on:
+      - press-indexer
+      - press-deployer-api
+    restart: unless-stopped
+    networks: [pressblockchain_default]
+
+  press-deployer-api:
+    build:
+      context: ../../
+      dockerfile: rust/deployer_api/Dockerfile
+    container_name: press-deployer-api
+    environment:
+      PORT: "8086"
+      STATE_DIR: /state
+      RPC_HTTP: http://press-rpc:8545
+      DATABASE_URL: postgres://press:press@press-postgres:5432/press
+    volumes:
+      - ../../state:/state
+      - ../../:/repo
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "8086:8086"
+    depends_on:
+      press-postgres:
+        condition: service_healthy
+      press-rpc:
+        condition: service_healthy
+    restart: unless-stopped
+    networks: [pressblockchain_default]
+
+  # Static installer UI served directly (no placeholders; production file)
+  press-deployer-ui:
+    build: ../../apps/deployer-ui
+    container_name: press-deployer-ui
+    ports:
+      - "8090:80"
+    restart: unless-stopped
+    networks: [pressblockchain_default]
+
+press-bots:
+  build:
+    context: ../..
+    dockerfile: rust/bots_service/Dockerfile
+  container_name: press-bots
+  environment:
+    - PRESS_BOTS_PUBLIC_URL=https://bots.pressblockchain.io
+    - PRESS_BOTS_STATE=/state/bots_config.json
+    - PRESS_BOTS_QUEUE=/state/bots_queue.json
+    - PRESS_BOTS_MISSIONS=/state/bots_missions.json
+    - PRESS_BOTS_BINDINGS=/state/bots_bindings.json
+    - PRESS_TG_CODES=/state/tg_onboard_codes.json
+    - PRESS_TG_SUBS=/state/tg_subscriptions.json
+    - PRESS_HQ_GUILD_ID=${PRESS_HQ_GUILD_ID:-}
+    - PRESS_HQ_ADMIN_ROLE_ID=${PRESS_HQ_ADMIN_ROLE_ID:-}
+    - DISCORD_CLIENT_SECRET=${DISCORD_CLIENT_SECRET:-}
+    - TELEGRAM_BOT_USERNAME=${TELEGRAM_BOT_USERNAME:-PressPulseBot}
+    - PRESS_RPC_HTTP=http://press-rpc:8545
+    - PRESS_QUERY_API=http://query-api:8787
+    - PRESS_INDEXER_API=http://press-indexer:8786
+    - # Optional: set these to enable bots
+    - DISCORD_BOT_TOKEN=${DISCORD_BOT_TOKEN:-}
+    - DISCORD_CLIENT_ID=${DISCORD_CLIENT_ID:-}
+    - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN:-}
+    - PRESS_BOT_NAME=PressPulse
+    - PRESS_BOTS_JWT_SECRET=${PRESS_BOTS_JWT_SECRET:-change-me}
+    - DISCORD_REDIRECT_URI=${DISCORD_REDIRECT_URI:-https://bots.pressblockchain.io/api/bots/auth/discord/callback}
+    - TELEGRAM_BOT_USERNAME=${TELEGRAM_BOT_USERNAME:-PressPulseBot}
+  volumes:
+    - ../../state:/state
+  ports:
+    - "8790:8790"
+  depends_on:
+    - query-api
+    - press-indexer
+  healthcheck:
+    test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8790/health"]
+    interval: 15s
+    timeout: 3s
+    retries: 6
+  healthcheck:
+    test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8791/"]
+    interval: 20s
+    timeout: 3s
+    retries: 6
+  restart: always
+  networks: [pressblockchain_default]
+
+bots-ui:
+  build:
+    context: ../../apps/bots-dashboard
+    dockerfile: Dockerfile
+  container_name: bots-ui
+  ports:
+    - "8099:8099"
+  restart: always
+  networks: [pressblockchain_default]
+
+press-status:
+  build:
+    context: ../..
+    dockerfile: rust/status_service/Dockerfile
+  container_name: press-status
+  environment:
+    - PRESS_STATUS_PUBLIC_URL=https://status.pressblockchain.io
+    - PRESS_STATUS_STATE=/state/status_config.json
+  volumes:
+    - ../../state:/state
+  ports:
+    - "8791:8791"
+  restart: unless-stopped
+  networks: [pressblockchain_default]
+
+status-ui:
+  build:
+    context: ../../apps/status-page
+    dockerfile: Dockerfile
+  container_name: status-ui
+  ports:
+    - "8100:8100"
+  restart: unless-stopped
+  networks: [pressblockchain_default]
+
+
+oracle-service:
+  build:
+    context: ../..
+    dockerfile: ops/docker/Dockerfile.oracle
+    volumes:
+      - ./state:/state
+  environment:
+    - PRESS_INDEXER_API=http://press-indexer:8786
+    - PRESS_QUERY_API=http://query-api:8787
+    - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - ORACLE_SHARED_SECRET=${ORACLE_SHARED_SECRET:-}
+  depends_on:
+    - press-indexer
+    - query-api
+  networks:
+    - press-net
+  restart: unless-stopped
