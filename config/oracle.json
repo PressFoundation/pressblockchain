@@ -1,0 +1,25 @@
+{
+  "enabled": true,
+  "provider": {
+    "openai": {
+      "enabled": true,
+      "api_key_env": "OPENAI_API_KEY",
+      "model": "gpt-4.1-mini"
+    },
+    "local": {
+      "enabled": true
+    }
+  },
+  "features": {
+    "similarity": true,
+    "copyright_scan": true,
+    "conflict_flags": true,
+    "auto_tagging": true
+  },
+  "b2b_api": {
+    "enabled": true,
+    "price_press_per_call": 5,
+    "monthly_min_press": 500
+  },
+  "notes": "If disabled, content pipeline runs without oracle checks; publishing remains available."
+}

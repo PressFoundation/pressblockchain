@@ -1,0 +1,118 @@
+{
+  "version": "RR76",
+  "note": "Set enabled=false to fully disable route/service exposure at gateway. Compose can also disable containers via profiles.",
+  "features": {
+    "exchange": {
+      "enabled": true,
+      "label": "Press Exchange"
+    },
+    "proposal_center": {
+      "enabled": true,
+      "label": "Proposal Center"
+    },
+    "court": {
+      "enabled": true,
+      "label": "Press Court"
+    },
+    "council": {
+      "enabled": true,
+      "label": "Press Council"
+    },
+    "marketplace": {
+      "enabled": true,
+      "label": "Marketplace"
+    },
+    "syndication": {
+      "enabled": true,
+      "label": "Syndication"
+    },
+    "oracle": {
+      "enabled": true,
+      "label": "Press Oracle"
+    },
+    "indexer": {
+      "enabled": true,
+      "label": "Indexer"
+    },
+    "dev_console": {
+      "enabled": true,
+      "label": "Dev Console"
+    },
+    "dev_abi_studio": {
+      "enabled": true,
+      "label": "ABI Studio"
+    },
+    "dev_index_recipes": {
+      "enabled": true,
+      "label": "Index Recipes"
+    },
+    "dev_testnet_ops": {
+      "enabled": true,
+      "label": "Testnet Ops"
+    },
+    "wallet": {
+      "enabled": true,
+      "label": "Press Wallet"
+    },
+    "explorer": {
+      "enabled": true,
+      "label": "Explorer"
+    },
+    "outlet_wizard": {
+      "enabled": true,
+      "label": "Outlet Wizard"
+    },
+    "outlet_dashboard": {
+      "enabled": true,
+      "label": "Outlet Dashboard"
+    },
+    "exchange_portal": {
+      "enabled": true,
+      "desc": "Public Exchange Portal UI (/exchange) showing listings + trust badges (domain proofs + token tests).",
+      "route": "/exchange"
+    },
+    "tier_perks": {
+      "enabled": true,
+      "desc": "Tier-perks configuration + eligibility APIs (/api/tiers/*, /api/perks/eligible).",
+      "route": "/api/tiers/config"
+    },
+    "advanced_analytics": {
+      "enabled": true,
+      "desc": "Premium advanced analytics API for outlets (Tier 2+).",
+      "route": "/api/analytics/advanced"
+    },
+    "syndication_marketplace": {
+      "enabled": true,
+      "desc": "Premium syndication marketplace API (Tier 2+).",
+      "route": "/api/syndication/marketplace"
+    },
+    "press_oracle": {
+      "enabled": true,
+      "desc": "Press Oracle microservices UI + APIs (toggleable).",
+      "route": "/oracle"
+    },
+    "devsuite": {
+      "enabled": true,
+      "desc": "Developer tools suite UI (toggleable).",
+      "route": "/dev"
+    }
+  },
+  "ENABLE_BOTS": true,
+  "ENABLE_STATUS": true,
+  "ENABLE_BOTS_DISPATCH": true,
+  "ENABLE_ORACLE": true,
+  "ENABLE_ORACLE_PIPELINE_V1": true,
+  "ENABLE_ORACLE_OPENAI_OPTIONAL": true,
+  "onchainHeartbeat": {
+    "enabledByDefault": true,
+    "description": "On-chain uptime heartbeat events"
+  },
+  "botsGuildSelector": {
+    "enabledByDefault": true,
+    "description": "Select target guild by name in HQ broadcast console"
+  },
+  "bots": {
+    "enabledByDefault": true,
+    "description": "PressPulse Discord+Telegram bots"
+  }
+}

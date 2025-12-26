@@ -1,0 +1,15 @@
+{
+  "vote_fee_press": 5,
+  "proposal_submit_fee_press": 250,
+  "proposal_refund_on_approval_pct": 25,
+  "outlet_discount_pct": 20,
+  "vote_fee_exempt_roles": [
+    "PRESS_COUNCIL"
+  ],
+  "anti_spam": {
+    "min_confirmations": 3,
+    "cooldowns": {
+      "per_wallet_vote_seconds": 30
+    }
+  }
+}

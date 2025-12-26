@@ -1,0 +1,30 @@
+[
+  {
+    "symbol": "ETH",
+    "type": "native",
+    "address": "",
+    "decimals": 18,
+    "name": "Ether (Native)"
+  },
+  {
+    "symbol": "PRESS",
+    "type": "erc20",
+    "address": "<set-after-deploy>",
+    "decimals": 18,
+    "name": "Press Token"
+  },
+  {
+    "symbol": "USDC",
+    "type": "erc20",
+    "address": "<set-by-bridge>",
+    "decimals": 6,
+    "name": "USD Coin (Bridged)"
+  },
+  {
+    "symbol": "WBTC",
+    "type": "erc20",
+    "address": "<set-by-bridge>",
+    "decimals": 8,
+    "name": "Wrapped BTC (Bridged)"
+  }
+]

@@ -1,0 +1,53 @@
+{
+  "enabled": true,
+  "epoch": "monthly",
+  "role_pools": {
+    "reader": {
+      "eligible_roles": [
+        "reader"
+      ],
+      "min_activity": {
+        "votes": 3,
+        "tips_sent": 1
+      },
+      "weighting": "activity_weighted_equalized"
+    },
+    "journalist": {
+      "eligible_roles": [
+        "journalist",
+        "editor"
+      ],
+      "min_activity": {
+        "articles": 1,
+        "votes": 3
+      },
+      "weighting": "truth_weighted"
+    },
+    "fact_checker": {
+      "eligible_roles": [
+        "fact_checker"
+      ],
+      "min_activity": {
+        "verifications": 5
+      },
+      "weighting": "accuracy_weighted"
+    },
+    "source": {
+      "eligible_roles": [
+        "source"
+      ],
+      "min_activity": {
+        "source_attestations": 1
+      },
+      "weighting": "reliability_weighted"
+    }
+  },
+  "excluded_roles": [
+    "council",
+    "outlet",
+    "validator",
+    "admin"
+  ],
+  "payout_asset": "PRESS",
+  "notes": "If module disabled, routes fallback to treasury and no pool payouts run."
+}

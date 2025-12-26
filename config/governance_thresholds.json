@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "articleApproval": {
+    "windowHours": 72,
+    "roles": {
+      "journalist": {
+        "minApprovals": 50
+      },
+      "editor": {
+        "minApprovals": 15
+      },
+      "outlet": {
+        "minApprovals": 10
+      }
+    }
+  },
+  "proposals": {
+    "default": {
+      "feePRESS": 500,
+      "refundOnApprovePercent": 25,
+      "durationHours": 120
+    },
+    "outletMint": {
+      "minApprovalPercent": 65,
+      "minVotes": 5000,
+      "durationHours": 168
+    }
+  }
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Historical Canon Migration",
+    "value": "Migrate legacy archives from Arweave into Press so all history becomes voteable, monetizable, and provable under one Court + Council policy stack."
+  },
+  {
+    "title": "Proof-of-Origin Hardening",
+    "value": "Preserve original Arweave TxID as immutable provenance while adding Press-layer signatures, votes, and co-author royalty primitives."
+  },
+  {
+    "title": "Outlet Onboarding Acceleration",
+    "value": "Outlets can import entire existing libraries quickly, then progressively enrich them with Press licensing, syndication, and marketplace distribution."
+  },
+  {
+    "title": "Court-Grade Evidence Linking",
+    "value": "Imported articles can be referenced as evidence objects in Court cases with official import flags and anti-tamper guarantees."
+  },
+  {
+    "title": "Unified Monetization + Rights Sales",
+    "value": "Arweave content becomes eligible for Press tipping, co-author splits, rights sales, and syndication marketplaces\u2014features Arweave does not natively provide."
+  }
+]

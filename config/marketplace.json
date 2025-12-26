@@ -1,0 +1,33 @@
+{
+  "enabled": true,
+  "listing_tiers": {
+    "basic": {
+      "fee_press": 500,
+      "features": [
+        "discoverability",
+        "tips"
+      ]
+    },
+    "pro": {
+      "fee_press": 2500,
+      "features": [
+        "discoverability",
+        "tips",
+        "syndication",
+        "analytics"
+      ]
+    },
+    "institutional": {
+      "fee_press": 10000,
+      "features": [
+        "discoverability",
+        "tips",
+        "syndication",
+        "analytics",
+        "api_access"
+      ]
+    }
+  },
+  "routing_fee_bps": 100,
+  "notes": "All marketplace activity routes fees via fee_routes.json and treasury_flywheel."
+}

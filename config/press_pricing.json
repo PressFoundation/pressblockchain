@@ -1,0 +1,19 @@
+{
+  "assumptions": {
+    "initial_liquidity_usd": 100000,
+    "lp_split": "50_50_USD",
+    "press_tokens_in_pool": 1000000,
+    "derived_launch_price_usd_per_press": 0.05
+  },
+  "fees_press": {
+    "vote_fee": 2,
+    "publish_fee": 25,
+    "coauthor_fee": 5,
+    "source_attach_fee": 15,
+    "arweave_import_fee_base": 1,
+    "outlet_token_deploy_fee": 5000,
+    "listing_tier_1_fee": 25000,
+    "listing_tier_2_fee": 75000,
+    "listing_tier_3_fee": 200000
+  }
+}

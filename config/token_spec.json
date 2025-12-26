@@ -1,0 +1,11 @@
+{
+  "standard": "PRESS-ERC20",
+  "supply": 1000000000,
+  "decimals": 18,
+  "transfer_tax_bps": 0,
+  "metadata_required": [
+    "name",
+    "symbol",
+    "outlet_id"
+  ]
+}

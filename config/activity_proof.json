@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "vote_window_hours": 72,
+  "anti_gatekeeping": {
+    "per_wallet_weight_cap_pct": 5,
+    "brigade_protection": {
+      "min_unique_voters": 25,
+      "max_votes_per_wallet_per_item": 1,
+      "cooldown_seconds": 15
+    }
+  },
+  "article_approval": {
+    "auto_close_hours": 72,
+    "pass_threshold_pct": 60
+  }
+}

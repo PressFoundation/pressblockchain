@@ -1,0 +1,44 @@
+{
+  "enabled": true,
+  "streams": {
+    "protocol_base_fee": {
+      "to": [
+        "treasury"
+      ],
+      "bps": [
+        10000
+      ]
+    },
+    "vote_fee": {
+      "to": [
+        "treasury",
+        "pools:bounty_pool"
+      ],
+      "bps": [
+        7000,
+        3000
+      ]
+    },
+    "proposal_fee": {
+      "to": [
+        "treasury",
+        "pools:bounty_pool"
+      ],
+      "bps": [
+        8000,
+        2000
+      ]
+    },
+    "tip_fee": {
+      "to": [
+        "treasury",
+        "pools:readers"
+      ],
+      "bps": [
+        5000,
+        5000
+      ]
+    }
+  },
+  "notes": "If distribution_pools module disabled, pools:* routes fall back to treasury."
+}

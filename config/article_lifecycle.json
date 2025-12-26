@@ -1,0 +1,40 @@
+{
+  "enabled": true,
+  "vote_window_hours": 72,
+  "roles": {
+    "reader": {
+      "min_votes": 25,
+      "min_unique_outlets": 5,
+      "fee_press_per_vote": 0.1
+    },
+    "journalist": {
+      "min_votes": 12,
+      "min_unique_outlets": 3,
+      "fee_press_per_vote": 0.25
+    },
+    "editor": {
+      "min_votes": 6,
+      "min_unique_outlets": 2,
+      "fee_press_per_vote": 0.5
+    },
+    "source": {
+      "min_votes": 3,
+      "min_unique_outlets": 1,
+      "fee_press_per_vote": 0.75
+    }
+  },
+  "anti_gatekeeping": {
+    "quorum_min_total_votes": 50,
+    "cap_single_wallet_weight_bps": 250,
+    "downvote_rate_limit_per_wallet_per_article": 1,
+    "upvote_rate_limit_per_wallet_per_article": 1
+  },
+  "states": [
+    "draft",
+    "submitted",
+    "voting",
+    "approved",
+    "rejected"
+  ],
+  "notes": "Explorer-friendly events must be emitted for each transition. Disabling this module preserves publishing but removes on-chain approval gates."
+}

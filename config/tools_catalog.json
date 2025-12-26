@@ -1,0 +1,105 @@
+[
+  {
+    "id": "public_node",
+    "name": "Public RPC Node",
+    "subdomain": "rpc.pressblockchain.io",
+    "default_enabled": true,
+    "category": "Core"
+  },
+  {
+    "id": "explorer",
+    "name": "Explorer (Blockscout-compatible)",
+    "subdomain": "explorer.pressblockchain.io",
+    "default_enabled": true,
+    "category": "Core"
+  },
+  {
+    "id": "wallet",
+    "name": "Press Wallet",
+    "subdomain": "wallet.pressblockchain.io",
+    "default_enabled": true,
+    "category": "Core"
+  },
+  {
+    "id": "proposal_center",
+    "name": "Proposal Center",
+    "subdomain": "proposals.pressblockchain.io",
+    "default_enabled": true,
+    "category": "Governance"
+  },
+  {
+    "id": "court",
+    "name": "Press Court",
+    "subdomain": "court.pressblockchain.io",
+    "default_enabled": true,
+    "category": "Governance"
+  },
+  {
+    "id": "council",
+    "name": "Press Council Console",
+    "subdomain": "council.pressblockchain.io",
+    "default_enabled": true,
+    "category": "Governance"
+  },
+  {
+    "id": "marketplace",
+    "name": "Syndication + Marketplace",
+    "subdomain": "market.pressblockchain.io",
+    "default_enabled": true,
+    "category": "Economy"
+  },
+  {
+    "id": "oracle_ai",
+    "name": "Press Oracle AI",
+    "subdomain": "oracle.pressblockchain.io",
+    "default_enabled": true,
+    "category": "AI"
+  },
+  {
+    "id": "outlet_wizard",
+    "name": "Outlet Wizard",
+    "subdomain": "deploy.pressblockchain.io/outlet",
+    "default_enabled": true,
+    "category": "Onboarding"
+  },
+  {
+    "id": "wp_suite",
+    "name": "WordPress Plugin Suite (SYNC + licensing)",
+    "subdomain": "",
+    "default_enabled": true,
+    "category": "Onboarding"
+  },
+  {
+    "id": "bots",
+    "name": "PressPulse Bots",
+    "subdomain": "bots.pressblockchain.io",
+    "default_enabled": true,
+    "category": "Core",
+    "can_disable": true,
+    "paths": [
+      "/",
+      "/dashboard"
+    ],
+    "depends_on": [
+      "press-bots",
+      "bots-ui",
+      "gateway"
+    ]
+  },
+  {
+    "id": "status",
+    "name": "Status",
+    "subdomain": "status.pressblockchain.io",
+    "default_enabled": true,
+    "category": "Core",
+    "can_disable": true,
+    "paths": [
+      "/"
+    ],
+    "depends_on": [
+      "press-status",
+      "status-ui",
+      "gateway"
+    ]
+  }
+]

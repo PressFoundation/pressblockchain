@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "standard": "PRESS-OUTLET-ERC",
+  "supply": {
+    "total": 100000000,
+    "decimals": 18,
+    "mintable": true,
+    "maxAdditionalMints": 3
+  },
+  "antiRug": {
+    "ownerLockDays": 180,
+    "transferLimits": {
+      "enabled": true,
+      "maxTxPercent": 0.5,
+      "maxWalletPercent": 2.0
+    },
+    "pauseAllowed": true,
+    "renounceBlocked": true
+  },
+  "fees": {
+    "liquidityRoutingPercent": 1.0,
+    "treasuryPercent": 0.5,
+    "liquidityRoutingPercentRange": [
+      0.5,
+      2.0
+    ]
+  },
+  "listingTiers": {
+    "basic": {
+      "pricePRESS": 5000,
+      "features": [
+        "wizard",
+        "explorer",
+        "wallet"
+      ]
+    },
+    "pro": {
+      "pricePRESS": 25000,
+      "features": [
+        "priority",
+        "marketplace",
+        "liquidity-routing"
+      ]
+    },
+    "sovereign": {
+      "pricePRESS": 100000,
+      "features": [
+        "auto-listing",
+        "api",
+        "analytics",
+        "priority-support"
+      ]
+    }
+  },
+  "verification": {
+    "requireTestTx": true,
+    "testTx": {
+      "type": "erc20_transfer",
+      "amountWei": "1000000000000000000"
+    }
+  }
+}

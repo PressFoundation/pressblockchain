@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "presets": [
+    {
+      "id": "mint_10m",
+      "mintAmount": 10000000,
+      "pricePRESS": 200000,
+      "bondPRESS": 50000,
+      "requiresPublicVote": false
+    },
+    {
+      "id": "mint_50m",
+      "mintAmount": 50000000,
+      "pricePRESS": 750000,
+      "bondPRESS": 150000,
+      "requiresPublicVote": true,
+      "minApprovalPercent": 65,
+      "minVotes": 5000
+    },
+    {
+      "id": "mint_100m",
+      "mintAmount": 100000000,
+      "pricePRESS": 1500000,
+      "bondPRESS": 300000,
+      "requiresPublicVote": true,
+      "minApprovalPercent": 72,
+      "minVotes": 12000
+    }
+  ]
+}

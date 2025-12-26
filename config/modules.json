@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "defaults": {
+    "enabledByDefault": true
+  },
+  "modules": {
+    "core_chain": {
+      "label": "Core Chain (RPC/Validator/Indexer)",
+      "enabled": true,
+      "critical": true,
+      "depends": []
+    },
+    "gateway": {
+      "label": "Gateway API",
+      "enabled": true,
+      "critical": true,
+      "depends": [
+        "core_chain"
+      ]
+    },
+    "wallet": {
+      "label": "Wallet",
+      "enabled": true,
+      "critical": false,
+      "depends": [
+        "core_chain",
+        "gateway"
+      ]
+    },
+    "explorer": {
+      "label": "Explorer",
+      "enabled": true,
+      "critical": false,
+      "depends": [
+        "core_chain",
+        "gateway"
+      ]
+    },
+    "status": {
+      "label": "Status Page",
+      "enabled": true,
+      "critical": false,
+      "depends": [
+        "gateway"
+      ]
+    },
+    "outlet_wizard": {
+      "label": "Outlet Wizard",
+      "enabled": true,
+      "critical": false,
+      "depends": [
+        "gateway",
+        "core_chain"
+      ]
+    },
+    "court": {
+      "label": "Press Court",
+      "enabled": true,
+      "critical": false,
+      "depends": [
+        "core_chain",
+        "gateway"
+      ]
+    },
+    "proposals": {
+      "label": "Proposal Center",
+      "enabled": true,
+      "critical": false,
+      "depends": [
+        "core_chain",
+        "gateway"
+      ]
+    },
+    "exchange": {
+      "label": "Exchange UI",
+      "enabled": true,
+      "critical": false,
+      "depends": [
+        "core_chain",
+        "gateway"
+      ]
+    },
+    "bots": {
+      "label": "Bots (Discord/Telegram)",
+      "enabled": true,
+      "critical": false,
+      "depends": [
+        "gateway",
+        "core_chain"
+      ]
+    },
+    "ai_oracle": {
+      "label": "Press Oracle AI",
+      "enabled": true,
+      "critical": false,
+      "depends": [
+        "gateway",
+        "core_chain"
+      ]
+    },
+    "wordpress_suite": {
+      "label": "WordPress Plugin Suite",
+      "enabled": true,
+      "critical": false,
+      "depends": [
+        "core_chain",
+        "gateway",
+        "outlet_wizard"
+      ]
+    }
+  },
+  "sources": true,
+  "coauthors": true,
+  "tip_bond_gate": true,
+  "governance_fee_router": true,
+  "distribution_pools": true,
+  "bounty_engine": true,
+  "fee_routes": true,
+  "activity_proof": true,
+  "core_chain": true,
+  "rpc_public": true,
+  "validator": true,
+  "press_token": true,
+  "indexer": true,
+  "proposal_center": true,
+  "press_court": true,
+  "press_council": true,
+  "marketplace": true,
+  "press_oracle": true,
+  "bots": true,
+  "status_page": true,
+  "outlet_wizard": true,
+  "wordpress_suite": true,
+  "bounties": true,
+  "dev_dapps": true,
+  "rewards_engine": true,
+  "source_role": true,
+  "treasury_flywheel": true,
+  "article_lifecycle": true,
+  "syndication_engine": true,
+  "oracle": true,
+  "deployer": true,
+  "outlet_api": true,
+  "liquidity_routing": true,
+  "burn_flywheel": true,
+  "earnings_vault": true,
+  "dispute_bonds": true,
+  "ai_verification_api": true
+}

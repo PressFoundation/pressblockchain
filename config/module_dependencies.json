@@ -1,0 +1,150 @@
+{
+  "core_chain": {
+    "required": true,
+    "dependsOn": []
+  },
+  "press_token": {
+    "required": true,
+    "dependsOn": [
+      "core_chain"
+    ]
+  },
+  "proposal_center": {
+    "required": true,
+    "dependsOn": [
+      "core_chain",
+      "press_token"
+    ]
+  },
+  "press_council": {
+    "required": true,
+    "dependsOn": [
+      "proposal_center",
+      "press_token"
+    ]
+  },
+  "press_court": {
+    "required": false,
+    "dependsOn": [
+      "press_council",
+      "press_token"
+    ]
+  },
+  "sync_plugin": {
+    "required": false,
+    "dependsOn": [
+      "press_token",
+      "proposal_center"
+    ]
+  },
+  "invisible_chain_publishing": {
+    "required": false,
+    "dependsOn": [
+      "sync_plugin",
+      "press_token"
+    ]
+  },
+  "source_secrecy_vault": {
+    "required": false,
+    "dependsOn": [
+      "press_token"
+    ]
+  },
+  "outlet_tokens": {
+    "required": false,
+    "dependsOn": [
+      "press_token",
+      "proposal_center"
+    ]
+  },
+  "liquidity_routing": {
+    "required": false,
+    "dependsOn": [
+      "press_token",
+      "outlet_tokens"
+    ]
+  },
+  "legacy_migration": {
+    "required": false,
+    "dependsOn": [
+      "press_token"
+    ]
+  },
+  "opinions": {
+    "required": false,
+    "dependsOn": [
+      "press_token"
+    ]
+  },
+  "ai_fact_dispute": {
+    "required": false,
+    "dependsOn": [
+      "press_token",
+      "proposal_center"
+    ]
+  },
+  "dispute_bonds": {
+    "required": false,
+    "dependsOn": [
+      "press_token",
+      "press_court"
+    ]
+  },
+  "earnings_vault": {
+    "required": false,
+    "dependsOn": [
+      "press_token"
+    ]
+  },
+  "licensing_engine": {
+    "required": false,
+    "dependsOn": [
+      "press_token"
+    ]
+  },
+  "ai_verification_api": {
+    "required": false,
+    "dependsOn": [
+      "press_token"
+    ]
+  },
+  "treasury_flywheel": {
+    "required": false,
+    "dependsOn": [
+      "press_token"
+    ]
+  },
+  "indexer": {
+    "required": false,
+    "dependsOn": [
+      "core_chain",
+      "press_token"
+    ]
+  },
+  "blockscout": {
+    "required": false,
+    "dependsOn": [
+      "core_chain",
+      "indexer"
+    ]
+  },
+  "public_node": {
+    "required": false,
+    "dependsOn": [
+      "core_chain"
+    ]
+  },
+  "chain_metadata": {
+    "required": false,
+    "dependsOn": [
+      "core_chain",
+      "press_token"
+    ]
+  },
+  "edge_proxy": {
+    "required": false,
+    "dependsOn": [
+      "core_chain"
+    ]
+  }
+}

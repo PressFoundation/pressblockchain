@@ -1,0 +1,32 @@
+{
+  "enabled": true,
+  "bounties": [
+    {
+      "key": "vote_mission_daily",
+      "title": "Vote Mission",
+      "description": "Cast 5 votes across 5 different outlets in 24h.",
+      "reward_press": 25,
+      "cooldown_hours": 24
+    },
+    {
+      "key": "first_time_fact_flag",
+      "title": "First Fact Flag",
+      "description": "File a valid fact-flag on a high-impact article.",
+      "reward_press": 50,
+      "cooldown_hours": 168
+    },
+    {
+      "key": "proposal_review",
+      "title": "Proposal Review",
+      "description": "Review and vote on 3 proposals in a week.",
+      "reward_press": 75,
+      "cooldown_hours": 168
+    }
+  ],
+  "anti_sybil": {
+    "min_wallet_age_days": 7,
+    "min_press_balance": 10,
+    "rate_limit_per_wallet_per_day": 5
+  },
+  "notes": "Rewards are paid to wallet balance (not bond). Fees and pools still route via fee_routes.json."
+}

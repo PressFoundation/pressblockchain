@@ -1,0 +1,14 @@
+{
+  "treasury_wallet": "<PRESS_TREASURY_WALLET>",
+  "protocol_fee_bps": 150,
+  "article_tip_fee_bps": 50,
+  "outlet_token_routing_bps": 100,
+  "burn_bps": 3000,
+  "vaults": {
+    "authors": "PressAuthorVault",
+    "coauthors": "PressCoAuthorVault",
+    "sources": "PressSourceVault",
+    "outlets": "PressOutletPool",
+    "treasury": "PressTreasuryVault"
+  }
+}

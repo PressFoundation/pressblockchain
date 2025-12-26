@@ -1,0 +1,75 @@
+{
+  "actions": {
+    "view_governance": {
+      "loginRequired": true,
+      "rolesAny": []
+    },
+    "vote_proposal": {
+      "loginRequired": true,
+      "rolesAny": [
+        "reader",
+        "journalist",
+        "outlet",
+        "council"
+      ]
+    },
+    "create_proposal": {
+      "loginRequired": true,
+      "rolesAny": [
+        "outlet",
+        "council"
+      ]
+    },
+    "execute_council_action": {
+      "loginRequired": true,
+      "rolesAny": [
+        "council"
+      ]
+    },
+    "view_court": {
+      "loginRequired": true,
+      "rolesAny": []
+    },
+    "file_court_case": {
+      "loginRequired": true,
+      "rolesAny": [
+        "journalist",
+        "outlet",
+        "council"
+      ]
+    },
+    "respond_court_case": {
+      "loginRequired": true,
+      "rolesAny": [
+        "outlet",
+        "council"
+      ]
+    },
+    "mint_article_nft": {
+      "loginRequired": true,
+      "rolesAny": [
+        "journalist",
+        "outlet"
+      ]
+    },
+    "list_outlet_token": {
+      "loginRequired": true,
+      "rolesAny": [
+        "outlet"
+      ]
+    },
+    "endorse_execution": {
+      "loginRequired": true,
+      "rolesAny": [
+        "council"
+      ]
+    },
+    "finalize_if_expired": {
+      "loginRequired": true,
+      "rolesAny": [
+        "reader"
+      ]
+    }
+  },
+  "notes": "Voting and proposing require PRESS ERC20 fees (approve + transferFrom). Reader role is implicit for any authenticated wallet."
+}

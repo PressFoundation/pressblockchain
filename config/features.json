@@ -1,0 +1,34 @@
+{
+  "modules": {
+    "exchange": {
+      "enabled": false,
+      "publicRead": true,
+      "requiresLogin": true
+    },
+    "proposalCenter": {
+      "enabled": true,
+      "publicRead": true,
+      "requiresLogin": true
+    },
+    "court": {
+      "enabled": true,
+      "publicRead": true,
+      "requiresLogin": true
+    },
+    "marketplace": {
+      "enabled": false,
+      "publicRead": true,
+      "requiresLogin": true
+    },
+    "outletInstaller": {
+      "enabled": true,
+      "publicRead": true,
+      "requiresLogin": false
+    },
+    "governanceDashboard": {
+      "enabled": true,
+      "publicRead": true,
+      "requiresLogin": true
+    }
+  }
+}

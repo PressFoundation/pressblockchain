@@ -1,0 +1,24 @@
+{
+  "enabled": true,
+  "bind_ip_default": "38.146.25.37",
+  "safe_port_fallbacks": [
+    8085,
+    8445,
+    3000
+  ],
+  "compose_project_name": "press-network-stack",
+  "profiles_default_on": [
+    "oracle",
+    "status_page",
+    "dev_dapps",
+    "article_lifecycle",
+    "marketplace",
+    "syndication_engine",
+    "bots"
+  ],
+  "secrets": {
+    "openai_env": "OPENAI_API_KEY",
+    "discord_env": "DISCORD_BOT_TOKEN",
+    "telegram_env": "TELEGRAM_BOT_TOKEN"
+  }
+}

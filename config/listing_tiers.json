@@ -1,0 +1,51 @@
+{
+  "tiers": {
+    "tier_1": {
+      "name": "Standard",
+      "price_hint": "Entry listing fee",
+      "perks": [
+        "Token listing + public market card",
+        "Basic outlet profile + official URL display",
+        "Standard ranking in listings feed",
+        "Basic analytics (views/votes) for outlet dashboard"
+      ],
+      "limits": {
+        "api_rps": 2,
+        "syndication_slots": 0,
+        "featured_placements": 0
+      }
+    },
+    "tier_2": {
+      "name": "Premium",
+      "price_hint": "Higher listing fee",
+      "perks": [
+        "All Tier 1 perks",
+        "Premium placement boost in Exchange Portal",
+        "Verified outlet signal amplification in discovery",
+        "Advanced analytics (cohort + sentiment summary)",
+        "Syndication marketplace access (limited)"
+      ],
+      "limits": {
+        "api_rps": 8,
+        "syndication_slots": 5,
+        "featured_placements": 3
+      }
+    },
+    "tier_3": {
+      "name": "Elite",
+      "price_hint": "Highest listing fee",
+      "perks": [
+        "All Tier 2 perks",
+        "Elite placement + highlighted badge",
+        "Priority syndication marketplace access (high)",
+        "AI Oracle deep scans for every published article",
+        "Developer + newsroom priority support flags"
+      ],
+      "limits": {
+        "api_rps": 20,
+        "syndication_slots": 50,
+        "featured_placements": 12
+      }
+    }
+  }
+}

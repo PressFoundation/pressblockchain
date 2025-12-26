@@ -1,0 +1,6 @@
+{
+  "tip_treasury_cut_bps": 200,
+  "min_tip_bond_press_wei": "100000000000000000",
+  "bond_lock_days": 60,
+  "coauthor_fee_press_wei": "100000000000000000"
+}

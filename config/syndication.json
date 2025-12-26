@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "pricing_asset": "PRESS",
+  "license_types": [
+    "reprint",
+    "ai_training",
+    "academic",
+    "broadcast"
+  ],
+  "defaults": {
+    "duration_days": 365,
+    "geography": "global"
+  },
+  "protocol_cut_bps": 500,
+  "notes": "Licenses are priced in PRESS. Enforcement and payouts are on-chain in later passes."
+}

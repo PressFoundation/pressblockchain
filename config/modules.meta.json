@@ -1,0 +1,164 @@
+[
+  {
+    "key": "core_chain",
+    "enabledByDefault": true,
+    "safeToDisable": false,
+    "description": "Base chain services (must remain on)."
+  },
+  {
+    "key": "rpc_public",
+    "enabledByDefault": true,
+    "safeToDisable": false,
+    "description": "Public RPC endpoint service."
+  },
+  {
+    "key": "validator",
+    "enabledByDefault": true,
+    "safeToDisable": false,
+    "description": "Validator / sequencer service."
+  },
+  {
+    "key": "press_token",
+    "enabledByDefault": true,
+    "safeToDisable": false,
+    "description": "PRESS token deploy + registry."
+  },
+  {
+    "key": "indexer",
+    "enabledByDefault": true,
+    "safeToDisable": true,
+    "description": "Event/block indexer for dashboards and explorers."
+  },
+  {
+    "key": "proposal_center",
+    "enabledByDefault": true,
+    "safeToDisable": true,
+    "description": "Governance proposal + parameter-change hub."
+  },
+  {
+    "key": "press_court",
+    "enabledByDefault": true,
+    "safeToDisable": true,
+    "description": "Court dispute engine + evidence registry."
+  },
+  {
+    "key": "press_council",
+    "enabledByDefault": true,
+    "safeToDisable": true,
+    "description": "Council terms, multisig, actions."
+  },
+  {
+    "key": "marketplace",
+    "enabledByDefault": true,
+    "safeToDisable": true,
+    "description": "Syndication + licensing + NFT marketplace."
+  },
+  {
+    "key": "press_oracle",
+    "enabledByDefault": true,
+    "safeToDisable": true,
+    "description": "AI-backed verification + conflict detection."
+  },
+  {
+    "key": "bots",
+    "enabledByDefault": true,
+    "safeToDisable": true,
+    "description": "Discord/Telegram bot platform + dashboard."
+  },
+  {
+    "key": "status_page",
+    "enabledByDefault": true,
+    "safeToDisable": true,
+    "description": "System status dashboard at status.pressblockchain.io."
+  },
+  {
+    "key": "outlet_wizard",
+    "enabledByDefault": true,
+    "safeToDisable": true,
+    "description": "Outlet deploy wizard + domain connect + outlet token."
+  },
+  {
+    "key": "wordpress_suite",
+    "enabledByDefault": true,
+    "safeToDisable": true,
+    "description": "WordPress plugins suite (SYNC + revenue modules)."
+  },
+  {
+    "key": "distribution_pools",
+    "enabledByDefault": true,
+    "safeToDisable": true,
+    "description": "Role distribution pools & payouts."
+  },
+  {
+    "key": "fee_routes",
+    "enabledByDefault": true,
+    "safeToDisable": true,
+    "description": "Fee routing map & treasury rails."
+  },
+  {
+    "key": "activity_proof",
+    "enabledByDefault": true,
+    "safeToDisable": true,
+    "description": "Anti-gatekeeping activity/vote protections."
+  },
+  {
+    "key": "bounties",
+    "enabledByDefault": true,
+    "safeToDisable": true,
+    "description": "Bounty engine for participation incentives."
+  },
+  {
+    "key": "dev_dapps",
+    "enabledByDefault": true,
+    "safeToDisable": true,
+    "description": "Developer dapps suite (faucet, deployer, events, debug)."
+  },
+  {
+    "key": "rewards_engine",
+    "enabledByDefault": true,
+    "safeToDisable": true,
+    "description": "Rewards engine service powering distribution pools + bounties APIs."
+  },
+  {
+    "key": "source_role",
+    "enabledByDefault": true,
+    "safeToDisable": true,
+    "description": "Source role registry + attach/request flows + revenue splits."
+  },
+  {
+    "key": "treasury_flywheel",
+    "enabledByDefault": true,
+    "safeToDisable": true,
+    "description": "Treasury accumulation, buyback + burn, grants funding."
+  },
+  {
+    "key": "article_lifecycle",
+    "enabledByDefault": true,
+    "safeToDisable": true,
+    "description": "On-chain article lifecycle + 72h voting + role thresholds + live vote bar API."
+  },
+  {
+    "key": "syndication_engine",
+    "enabledByDefault": true,
+    "safeToDisable": true,
+    "description": "Syndication licensing engine priced in PRESS."
+  },
+  {
+    "key": "oracle",
+    "enabledByDefault": true,
+    "safeToDisable": true,
+    "description": "Press Oracle AI verification engine + B2B API billing."
+  },
+  {
+    "key": "deployer",
+    "enabledByDefault": true,
+    "safeToDisable": true,
+    "description": "Core web deployer/installer for Press Blockchain (module toggles, secrets, compose orchestration)."
+  },
+  {
+    "key": "outlet_api",
+    "enabledByDefault": true,
+    "safeToDisable": true,
+    "description": "Outlet Wizard backend API (domain validation, outlet create, outlet token deploy + test tx)."
+  }
+]

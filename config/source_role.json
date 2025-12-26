@@ -1,0 +1,20 @@
+{
+  "enabled": true,
+  "kyc_optional": true,
+  "kyc_providers": {
+    "persona": {
+      "enabled": false,
+      "api_key_env": "PERSONA_API_KEY"
+    },
+    "sumsub": {
+      "enabled": false,
+      "api_key_env": "SUMSUB_API_KEY"
+    }
+  },
+  "attach_rules": {
+    "max_sources_per_article": 3,
+    "max_source_share_bps": 2000,
+    "default_source_share_bps": 500
+  },
+  "notes": "If module disabled, source requests/attachments are disabled and revenue routes exclude sources."
+}

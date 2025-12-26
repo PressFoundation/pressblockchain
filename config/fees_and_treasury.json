@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "treasury": {
+    "wallet": "",
+    "defaultProtocolFeeBps": 100
+  },
+  "fees": {
+    "publishArticlePress": 25,
+    "votePress": 2,
+    "addCoAuthorPress": 5,
+    "arweaveImportPressPerItem": 1,
+    "proposalCreatePress": 500
+  },
+  "routing": {
+    "outletLiquidityRoutingBpsMin": 50,
+    "outletLiquidityRoutingBpsMax": 200,
+    "enforcePressPayment": true
+  }
+}

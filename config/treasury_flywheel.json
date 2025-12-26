@@ -1,0 +1,23 @@
+{
+  "enabled": true,
+  "treasury_wallet": "AUTO_GENERATED_AT_INSTALL",
+  "fee_sources": [
+    "protocol_fees",
+    "routing_fees",
+    "listing_fees",
+    "api_fees"
+  ],
+  "buyback_burn": {
+    "enabled": true,
+    "epoch": "yearly",
+    "min_treasury_balance_press": 500000,
+    "buyback_percentage_bps": 3000,
+    "burn_percentage_bps": 10000
+  },
+  "grants": {
+    "enabled": true,
+    "funding_asset": "PRESS",
+    "approval": "proposal_center"
+  },
+  "notes": "All protocol fees accumulate to treasury. Flywheel executes only if thresholds are met."
+}

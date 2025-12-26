@@ -1,0 +1,9 @@
+{
+  "import_fee_press_wei": "500000000000000000",
+  "import_bond_press_wei": "2000000000000000000",
+  "bond_lock_days": 60,
+  "flags": {
+    "official_arweave_import": true,
+    "arweave_txid_hash_indexed": true
+  }
+}

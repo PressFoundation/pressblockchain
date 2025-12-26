@@ -1,0 +1,152 @@
+{
+  "easy_variables": [
+    {
+      "key": "OUTLET_BOND_MIN",
+      "label": "Outlet minimum bond",
+      "type": "int",
+      "suggested": "100000",
+      "desc": "Minimum bonded PRESS required to maintain outlet status."
+    },
+    {
+      "key": "COUNCIL_BOND_MIN",
+      "label": "Council minimum bond",
+      "type": "int",
+      "suggested": "250000",
+      "desc": "Minimum bonded PRESS required to maintain council status."
+    },
+    {
+      "key": "VOTE_FEE_WEI",
+      "label": "Vote fee (wei)",
+      "type": "int",
+      "suggested": "1000000000000000",
+      "desc": "Fee required per vote to prevent spam and manipulation."
+    },
+    {
+      "key": "PROPOSAL_FEE_WEI",
+      "label": "Proposal fee (wei)",
+      "type": "int",
+      "suggested": "10000000000000000",
+      "desc": "Fee required to create a proposal. 25% refunded on approval."
+    },
+    {
+      "key": "ROLE_JOURNALIST_COST",
+      "label": "Journalist role cost",
+      "type": "int",
+      "suggested": "2500",
+      "desc": "Base PRESS cost to claim journalist role (policy variable)."
+    },
+    {
+      "key": "ROLE_OUTLET_COST",
+      "label": "Outlet role cost",
+      "type": "int",
+      "suggested": "25000",
+      "desc": "Base PRESS cost to create an outlet (policy variable)."
+    },
+    {
+      "key": "LISTING_TIER1_FEE",
+      "label": "Listing Tier 1 fee",
+      "type": "int",
+      "suggested": "50000",
+      "desc": "Listing fee for Tier 1 exchange listing."
+    },
+    {
+      "key": "LISTING_TIER2_FEE",
+      "label": "Listing Tier 2 fee",
+      "type": "int",
+      "suggested": "150000",
+      "desc": "Listing fee for Tier 2 exchange listing."
+    },
+    {
+      "key": "LISTING_TIER3_FEE",
+      "label": "Listing Tier 3 fee",
+      "type": "int",
+      "suggested": "350000",
+      "desc": "Listing fee for Tier 3 exchange listing."
+    },
+    {
+      "key": "COURT_CASE_FEE",
+      "label": "Court case filing fee",
+      "type": "int",
+      "suggested": "5000",
+      "desc": "Fee to open a court case; increases for repeat abuse."
+    },
+    {
+      "key": "EVIDENCE_VOTE_FEE",
+      "label": "Evidence vote fee",
+      "type": "int",
+      "suggested": "1000",
+      "desc": "Fee to vote on evidence legitimacy."
+    }
+  ],
+  "release_batch_variables": [
+    {
+      "key": "CONSENSUS_PARAM_X",
+      "label": "Consensus parameter change (batch)",
+      "type": "int",
+      "suggested": "1",
+      "desc": "High-impact change: must be queued for monthly release batch."
+    },
+    {
+      "key": "UPGRADE_RPC_IMAGE_TAG",
+      "label": "RPC image tag upgrade (batch)",
+      "type": "string",
+      "suggested": "vNext",
+      "desc": "Infrastructure upgrades are queued and applied in release batches."
+    }
+  ],
+  "policy": {
+    "easy_apply_requires": "council executor finalize + whitelisted config key + passed votes",
+    "batch_requires": "passed votes + council executor finalize + included in next release batch"
+  },
+  "presets": [
+    {
+      "key": "VOTE_FEE_PRESS",
+      "label": "Vote Fee (PRESS) - per vote",
+      "type": "uint",
+      "default": "1000000000000000000",
+      "description": "Flat fee charged in PRESS for every vote. Prevents spam and adds treasury revenue. Requires approve() allowance first."
+    },
+    {
+      "key": "DEFAULT_MIN_VOTERS",
+      "label": "Default Min Voters",
+      "type": "uint",
+      "default": "25",
+      "description": "Minimum distinct voters required for a proposal to finalize. Anti-brigading / anti-gatekeeping baseline."
+    },
+    {
+      "key": "DEFAULT_QUORUM_VOTES",
+      "label": "Default Quorum Votes",
+      "type": "uint",
+      "default": "50",
+      "description": "Minimum total votes (yes+no) required for finalize."
+    },
+    {
+      "key": "DEFAULT_YES_BPS",
+      "label": "Default Yes Threshold (bps)",
+      "type": "uint",
+      "default": "6000",
+      "description": "Minimum yes percentage in basis points (6000=60%)."
+    },
+    {
+      "key": "DEFAULT_MIN_DURATION_SEC",
+      "label": "Default Min Duration (sec)",
+      "type": "uint",
+      "default": "86400",
+      "description": "Minimum voting duration before finalize unless supermajority."
+    },
+    {
+      "key": "DEFAULT_SUPER_YES_BPS",
+      "label": "Default Supermajority (bps)",
+      "type": "uint",
+      "default": "8000",
+      "description": "If yes% >= this and min voters met, finalize can occur early."
+    },
+    {
+      "key": "GRANT_TEMPLATE",
+      "label": "Treasury Grant Template",
+      "type": "template",
+      "default": "",
+      "description": "Preset grant proposal for funding builders/outlets. Uses createGrantProposal(recipient, amountWei). Requires GRANT action thresholds."
+    }
+  ]
+}
